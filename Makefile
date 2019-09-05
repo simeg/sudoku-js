@@ -1,4 +1,4 @@
-.PHONY: test run
+.PHONY: format fmt lint serve test
 
 NPM=$(shell which npm)
 NODE=$(shell which node)
@@ -10,11 +10,7 @@ JEST=$(BINS)/jest
 NODEMON=$(BINS)/nodemon
 PRETTIER=$(BINS)/prettier
 
-test:
-	@$(NODEMON) $(JEST)
-
-run:
-	@$(NODEMON) $(BABEL_NODE) src/sudoku.js
+ci: lint test
 
 format:
 	$(PRETTIER) "**/*.js" --write
@@ -23,3 +19,12 @@ fmt: format
 
 lint:
 	$(PRETTIER) --list-different "**/*.js"
+
+serve:
+	@$(NODEMON) $(BABEL_NODE) src/index.js
+
+test:
+	@$(JEST)
+
+test-watch:
+	@$(NODEMON) $(JEST)

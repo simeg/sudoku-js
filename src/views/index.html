@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <title>Sudoku</title>
+
+    <!-- Bootstrap -->
+    <!--
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+            integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o"
+            crossorigin="anonymous"></script>
+    -->
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:300&display=swap"
+          rel="stylesheet">
+</head>
+<body>
+<div style="display:flex;justify-content:center;align-items:center;">
+    <div class="container">
+        <div class="row">
+            {{#row1}}
+            <span class="box"><span>{{.}}</span></span>
+            {{/row1}}
+        </div>
+        <div class="row">
+            {{#row2}}
+            <span class="box"><span>{{.}}</span></span>
+            {{/row2}}
+        </div>
+        <div class="row">
+            {{#row3}}
+            <span class="box"><span>{{.}}</span></span>
+            {{/row3}}
+        </div>
+        <div class="row">
+            {{#row4}}
+            <span class="box"><span>{{.}}</span></span>
+            {{/row4}}
+        </div>
+        <div class="row">
+            {{#row5}}
+            <span class="box"><span>{{.}}</span></span>
+            {{/row5}}
+        </div>
+        <div class="row">
+            {{#row6}}
+            <span class="box"><span>{{.}}</span></span>
+            {{/row6}}
+        </div>
+        <div class="row">
+            {{#row7}}
+            <span class="box"><span>{{.}}</span></span>
+            {{/row7}}
+        </div>
+        <div class="row">
+            {{#row8}}
+            <span class="box"><span>{{.}}</span></span>
+            {{/row8}}
+        </div>
+        <div class="row">
+            {{#row9}}
+            <span class="box"><span>{{.}}</span></span>
+            {{/row9}}
+        </div>
+    </div>
+</div>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    .row {
+        display: flex;
+    }
+
+    .container {
+        border: 2px solid black;
+    }
+
+    .box {
+        font-family: 'Roboto Mono', monospace;
+        font-size: 37px;
+        border-right: 1px solid rgba(0, 0, 0, 0.2);
+        text-align: center;
+        padding: 10px 25px;
+        margin-left: -1px;
+        margin-top: -1px;
+    }
+
+    .box span {
+        cursor: pointer;
+    }
+
+    .box:nth-child(3), .box:nth-child(6) {
+        border-right: 2px solid black;
+    }
+
+    .box:nth-child(4), .box:nth-child(7) {
+        border-left: none;
+    }
+
+    .row:nth-child(4), .row:nth-child(7) {
+        border-top: 2px solid black;
+    }
+
+    .box:nth-child(9) {
+        border-right: none;
+    }
+
+    .row:nth-child(1), .row:nth-child(4), .row:nth-child(7) {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    }
+
+    .row:nth-child(3), .row:nth-child(6), .row:nth-child(9) {
+        border-top: 1px solid rgba(0, 0, 0, 0.2);
+    }
+
+</style>
+
+</body>
+</html>

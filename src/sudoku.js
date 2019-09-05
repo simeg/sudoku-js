@@ -2,7 +2,7 @@
 
 import { getRandomList, getNumbersFromColumn } from "./util.js";
 
-const generateSudoku = () => {
+const generateSudokuBoard = () => {
   const board = [];
 
   // Create columns
@@ -48,5 +48,5 @@ const generateSudoku = () => {
 };
 
 module.exports = {
-  generateSudokuBoard: generateSudoku
+  generateSudokuBoard
 };
