@@ -1,0 +1,31 @@
+{
+  "name": "sudoku-js",
+  "version": "1.0.0",
+  "description": "Sudoku in JavaScript",
+  "main": "src/sudoku.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simeg/sudoku-js.git"
+  },
+  "keywords": [
+    "sudoku"
+  ],
+  "author": "Simon Egersand",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/simeg/sudoku-js/issues"
+  },
+  "homepage": "https://github.com/simeg/sudoku-js#readme",
+  "devDependencies": {
+    "@babel/core": "7.5.5",
+    "@babel/node": "7.5.5",
+    "@babel/preset-env": "7.5.5",
+    "babel-jest": "24.8.0",
+    "jest": "24.9.0",
+    "nodemon": "^1.19.2",
+    "prettier-eslint": "^9.0.0"
+  },
+  "engines": {
+    "node": "12.x"
+  }
+}
