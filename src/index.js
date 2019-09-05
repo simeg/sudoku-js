@@ -1,4 +1,4 @@
-import { generateSudokuBoard } from "./sudoku";
+import { adjustDifficulty, generateSudokuBoard, DIFFICULTIES } from "./sudoku";
 
 const express = require("express");
 const mustacheExpress = require("mustache-express");
@@ -12,7 +12,7 @@ app.set("view engine", "html");
 app.set("views", __dirname + "/views");
 
 app.get("/", async (req, res) => {
-  const board = generateSudokuBoard();
+  const board = adjustDifficulty(generateSudokuBoard(), DIFFICULTIES.easy);
   const row1 = board[0];
   const row2 = board[1];
   const row3 = board[2];
