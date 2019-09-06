@@ -16,12 +16,10 @@ const adjustDifficulty = (board, difficulty) => {
       max = 5;
       break;
     case DIFFICULTIES.medium:
-      // TODO
       min = 2;
       max = 5;
       break;
     case DIFFICULTIES.hard:
-      // TODO
       min = 2;
       max = 4;
       break;
