@@ -6,9 +6,13 @@ GIT=$(shell which git)
 BINS=$(shell npm bin)
 
 BABEL_NODE=$(BINS)/babel-node
+BABEL=$(BINS)/babel
 JEST=$(BINS)/jest
 NODEMON=$(BINS)/nodemon
 PRETTIER=$(BINS)/prettier
+
+build:
+	$(BABEL) -d ./build ./src -s
 
 ci: lint test
 
@@ -19,6 +23,12 @@ fmt: format
 
 lint:
 	$(PRETTIER) --list-different "**/*.js"
+
+move-html:
+	cp -r src/views build/
+
+production: build move-html
+	$(NODE) src/index.js
 
 serve:
 	@$(NODEMON) $(BABEL_NODE) src/index.js
