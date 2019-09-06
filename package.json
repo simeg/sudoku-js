@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Sudoku in JavaScript",
   "main": "src/sudoku.js",
+  "scripts": {
+    "start": "make production"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/simeg/sudoku-js.git"
@@ -19,7 +22,8 @@
   "dependencies": {
     "cors": "2.8.5",
     "express": "4.17.1",
-    "mustache-express": "1.2.8"
+    "mustache-express": "1.2.8",
+    "@babel/cli": "7.5.5"
   },
   "devDependencies": {
     "@babel/core": "7.5.5",
