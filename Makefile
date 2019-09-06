@@ -28,7 +28,7 @@ move-html:
 	cp -r src/views build/
 
 production: build move-html
-	$(NODE) src/index.js
+	$(NODE) build/index.js
 
 serve:
 	@$(NODEMON) $(BABEL_NODE) src/index.js
