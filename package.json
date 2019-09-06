@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "Sudoku in JavaScript",
   "main": "src/sudoku.js",
-  "scripts": {
-    "start": "make production"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/simeg/sudoku-js.git"
@@ -23,12 +20,12 @@
     "cors": "2.8.5",
     "express": "4.17.1",
     "mustache-express": "1.2.8",
-    "@babel/cli": "7.5.5"
+    "@babel/cli": "7.5.5",
+    "@babel/core": "7.5.5",
+    "@babel/preset-env": "7.5.5"
   },
   "devDependencies": {
-    "@babel/core": "7.5.5",
     "@babel/node": "7.5.5",
-    "@babel/preset-env": "7.5.5",
     "babel-jest": "24.8.0",
     "jest": "24.9.0",
     "nodemon": "1.19.2",
