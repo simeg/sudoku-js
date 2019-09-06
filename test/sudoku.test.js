@@ -10,7 +10,17 @@ import {
 
 import { getRandomList, getRandomInt, getNumbersFromColumn } from "../src/util";
 
-// TODO: test adjustDifficulty
+test("adjustDifficulty removes correct amount of numbers [easy]", () => {
+  testAdjustDifficulty(DIFFICULTIES.easy, 3, 5);
+});
+
+test("adjustDifficulty removes correct amount of numbers [medium]", () => {
+  testAdjustDifficulty(DIFFICULTIES.medium, 2, 5);
+});
+
+test("adjustDifficulty removes correct amount of numbers [hard]", () => {
+  testAdjustDifficulty(DIFFICULTIES.hard, 2, 4);
+});
 
 test("getNumbersInBox should return all numbers from specified box", () => {
   const boardWithBoxOne = [
@@ -245,3 +255,16 @@ test("getNumbersFromColumn returns list of all numbers in column N", () => {
   expect(actualSecondColumn).toEqual([4, 5, 6]);
   expect(actualThirdColumn).toEqual([7, 9]);
 });
+
+const testAdjustDifficulty = (difficulty, min, max) => {
+  const board = generateSudokuBoard();
+  const actualAdjustedBoard = adjustDifficulty(board, difficulty);
+
+  // Check all rows so that they don't contain more than min-max
+  for (let i = 0; i < actualAdjustedBoard.length; i++) {
+    // Filter out empty values
+    const row = actualAdjustedBoard[i].filter(s => s !== "");
+    expect(row.length).not.toBeLessThan(min);
+    expect(row.length).not.toBeGreaterThan(max);
+  }
+};

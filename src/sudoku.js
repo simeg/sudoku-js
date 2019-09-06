@@ -17,13 +17,13 @@ const adjustDifficulty = (board, difficulty) => {
       break;
     case DIFFICULTIES.medium:
       // TODO
-      min = 3;
+      min = 2;
       max = 5;
       break;
     case DIFFICULTIES.hard:
       // TODO
-      min = 3;
-      max = 5;
+      min = 2;
+      max = 4;
       break;
     default:
       console.error("Unknown difficulty", difficulty);
