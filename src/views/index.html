@@ -501,6 +501,21 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="game-controls">
+                            <div class="game-controls-buttons">
+                                <div class="game-controls-item game-controls-erase"
+                                     data-action="erase">
+                                    <svg class="icon-game-control"
+                                         xmlns="http://www.w3.org/2000/svg"
+                                         viewBox="0 0 32 30">
+                                        <path fill="currentColor"
+                                              fill-rule="evenodd"
+                                              d="M13.861 28.126l7.01-7.017.004-.003.002-.002 9.58-9.59a2.584 2.584 0 0 0 .763-1.842c0-.695-.271-1.35-.763-1.843L23.373.739c-.986-.986-2.7-.984-3.682 0l-9.58 9.59-.004.002-.002.003-9.344 9.35A2.592 2.592 0 0 0 0 21.529c0 .695.27 1.35.761 1.842l5.64 5.645a.528.528 0 0 0 .369.153h24.48v-1.042H13.861zm6.566-26.65c.591-.587 1.621-.59 2.209 0l7.084 7.09c.295.295.458.688.458 1.106 0 .418-.163.81-.458 1.105L20.506 20l-9.292-9.302 9.213-9.222zM6.986 28.126l-5.488-5.492a1.557 1.557 0 0 1-.457-1.105c0-.418.163-.81.457-1.106l8.979-8.986 9.291 9.302-7.381 7.387H6.986z"></path>
+                                    </svg>
+                                    <div class="game-controls-label">Erase</div>
+                                </div>
+                            </div>
+                        </div>
                     </nav>
                 </div>
             </div>
@@ -513,28 +528,46 @@
 
 <script>
     let chosenNumber = 0;
+    let shouldErase = false;
     $(".numpad-item").click(event => {
-        chosenNumber = $(event.currentTarget).attr('data-value');
-        $(event.currentTarget).parent().children().removeClass("background-highlight");
-        $(event.currentTarget).addClass("background-highlight");
+        const numpadItem = $(event.currentTarget);
+        chosenNumber = numpadItem.attr('data-value');
+        numpadItem.parent().children().removeClass("background-highlight");
+        numpadItem.addClass("background-highlight");
+
+        const eraseBtn = $(".game-controls-erase");
+        if (eraseBtn.hasClass("background-highlight")) {
+            shouldErase = false;
+            eraseBtn.removeClass("background-highlight");
+        }
     });
 
     $(".game-cell").click(event => {
-        if (!!chosenNumber) {
-            const currentTarget = $(event.currentTarget);
-            const cellElement = currentTarget.find(".cell-value");
+        const gameCell = $(event.currentTarget);
+        const cellElement = gameCell.find(".cell-value");
 
-            // If generated number - do not allow to change number
-            const hasValue = currentTarget.text().trim() !== "";
-            const missingHighlightClass = !cellElement.hasClass("highlight");
-            const isGeneratedNumber = (hasValue && missingHighlightClass);
-            if (!isGeneratedNumber) {
-                cellElement.text("" + chosenNumber);
-                cellElement.addClass("highlight");
-                $(".numpad").children().removeClass("background-highlight");
-                chosenNumber = 0;
-            }
+        // If generated number - do not allow to modify
+        const hasValue = gameCell.text().trim() !== "";
+        const missingHighlightClass = !cellElement.hasClass("highlight");
+        const isGeneratedNumber = (hasValue && missingHighlightClass);
+        if (shouldErase) {
+            cellElement.text("");
+            $(".game-controls-erase").removeClass("background-highlight");
+            shouldErase = false;
+        } else if (!!chosenNumber && !isGeneratedNumber) {
+            cellElement.text("" + chosenNumber);
+            cellElement.addClass("highlight");
+            $(".numpad").children().removeClass("background-highlight");
+            chosenNumber = 0;
         }
+    });
+
+    $(".game-controls-erase").click(event => {
+        chosenNumber = 0;
+        $(".numpad").children().removeClass("background-highlight");
+        const eraseBtn = $(event.currentTarget);
+        eraseBtn.addClass("background-highlight");
+        shouldErase = true;
     });
 
     const startTimer = elementToAttachTo => {
@@ -1614,7 +1647,7 @@
 
     .game-value .cell-value {
         font-size: 32px;
-        padding-top: 3px;
+        padding-top: 5px;
         color: #354860;
         cursor: default
     }
@@ -2377,7 +2410,7 @@
     .game-controls-wrapper {
         max-height: 300px;
         min-width: 200px;
-        max-width: 300px;
+        max-width: 299px;
         width: 50%;
         margin-left: 20px;
         user-select: none;
@@ -2521,16 +2554,16 @@
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
-        -webkit-flex-basis: 50%;
-        -ms-flex-preferred-size: 50%;
-        flex-basis: 50%;
-        max-width: 50%;
+        -webkit-flex-basis: 100%;
+        -ms-flex-preferred-size: 100%;
+        flex-basis: 100%;
+        max-width: 100%;
         padding: 12px 0 6px;
         text-align: center;
         cursor: pointer;
         border-color: #bec6d4;
         border-style: solid;
-        border-width: 1px 0 0 1px;
+        border-width: 0 1px 1px 1px;
         -webkit-transition: all .2s ease-in-out;
         -o-transition: all .2s ease-in-out;
         -moz-transition: all .2s ease-in-out;
