@@ -8,6 +8,13 @@ const filterNonValues = (list, i) => {
   return list[i].filter(s => s !== "");
 };
 
+/**
+ * Removes values based on difficulty param from provided list of numbers
+ *
+ * @param {list} board - The list of numbers
+ * @param difficulty - The difficulty to adjust to
+ */
+
 const adjustDifficulty = (board, difficulty) => {
   let min, max;
   switch (difficulty) {
@@ -24,19 +31,24 @@ const adjustDifficulty = (board, difficulty) => {
       max = 4;
       break;
     default:
-      console.error("Unknown difficulty", difficulty);
+      console.error("Unknown difficulty:", difficulty);
   }
 
-  for (let i = 0; i < board.length; i++) {
+  // Clone the board param
+  const adjustedBoard = [...board];
+
+  for (let i = 0; i < adjustedBoard.length; i++) {
     const howManyThereShouldBeLeftInRow = getRandomInt(min, max);
 
-    while (filterNonValues(board, i).length !== howManyThereShouldBeLeftInRow) {
+    while (
+      filterNonValues(adjustedBoard, i).length !== howManyThereShouldBeLeftInRow
+    ) {
       const indexToRemove = getRandomInt(0, 8);
-      board[i][indexToRemove] = "";
+      adjustedBoard[i][indexToRemove] = "";
     }
   }
 
-  return board;
+  return adjustedBoard;
 };
 
 const getNumbersInBox = (board, number) => {
@@ -122,6 +134,16 @@ const getNumbersInBox = (board, number) => {
   return result;
 };
 
+/**
+ * Return the box based on the column and row number.
+ *
+ * Visual representation of the box order:
+ *   [1, 2, 3]
+ *   [4, 5, 6]
+ *   [7, 8, 9]
+ * @param {number} columnN - The column number (one-based numbering)
+ * @param {number} rowN - The row number (one-based numbering)
+ */
 const getBoxNumber = (columnN, rowN) => {
   const isFirstBox = columnN < 3 && rowN < 3;
   const isSecondBox = columnN >= 3 && columnN < 6 && rowN < 3;
@@ -158,6 +180,7 @@ const getBoxNumber = (columnN, rowN) => {
 
 const generateSudokuBoard = () => {
   let board = [];
+  let bigTries = 0;
 
   // Create columns
   while (board.length < 9) {
@@ -167,21 +190,15 @@ const generateSudokuBoard = () => {
   // First column can be in any order
   board[0] = getRandomList();
 
-  let bigTries = 0;
-
   for (let rowN = 1; rowN < 9; rowN++) {
     let bucket = getRandomList();
     let columnN = 0;
     let tries = 0;
 
-    let boxNumber = 0;
-    let numbersInBox = [];
-    let unavailableNumbers = [];
-    let columnNumbers = [];
-
     while (bucket.length > 0) {
-      // If enough failures - reset everything and try again
       if (bigTries > 50) {
+        // Algorithm failed and it won't find a solution =>
+        // reset entire board and start over
         board = [];
         bucket = getRandomList();
         while (board.length < 9) {
@@ -193,34 +210,42 @@ const generateSudokuBoard = () => {
         bigTries = 0;
         rowN = 1;
       }
-      boxNumber = getBoxNumber(columnN, rowN);
-      numbersInBox = getNumbersInBox(board, boxNumber);
-      columnNumbers = getNumbersFromColumn(columnN, board);
-      unavailableNumbers = [...new Set(numbersInBox.concat(columnNumbers))];
+      const boxNumber = getBoxNumber(columnN, rowN);
+      const numbersInBox = getNumbersInBox(board, boxNumber);
+      const columnNumbers = getNumbersFromColumn(columnN, board);
+      const unavailableNumbers = [
+        ...new Set(numbersInBox.concat(columnNumbers))
+      ];
 
-      let nextNumber = 0;
-      while (nextNumber === 0) {
-        let number = bucket.shift();
+      let shouldTryAgain = true;
+      while (shouldTryAgain) {
+        const number = bucket.shift();
         if (bucket.length === 0 && unavailableNumbers.includes(number)) {
+          // Only one number left and it's not available =>
+          // get new bucket of numbers and reset row
           bucket = getRandomList();
           board[rowN] = [];
           tries = 0;
           columnN = 0;
-          nextNumber = 1;
+          shouldTryAgain = false;
         } else if (unavailableNumbers.includes(number)) {
           if (tries > 9) {
+            // None of numbers in bucket is acceptable =>
+            // get new bucket of numbers and reset row
             bucket = getRandomList();
             board[rowN] = [];
             tries = 0;
             columnN = 0;
-            nextNumber = 1;
+            shouldTryAgain = false;
             bigTries++;
           } else {
+            // Number is already used in column or box
             bucket.push(number);
             tries++;
           }
         } else {
-          nextNumber = number;
+          // Found number that is acceptable
+          shouldTryAgain = false;
           board[rowN].push(number);
           columnN++;
           tries = 0;

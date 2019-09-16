@@ -1,3 +1,5 @@
+#!/bin/node
+
 import { adjustDifficulty, generateSudokuBoard, DIFFICULTIES } from "./sudoku";
 
 const express = require("express");
