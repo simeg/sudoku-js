@@ -16,6 +16,9 @@ build:
 
 ci: lint test
 
+deploy:
+	$(GIT) push heroku master
+
 format:
 	$(PRETTIER) "**/*.js" --write
 
