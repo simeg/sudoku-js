@@ -28,7 +28,7 @@ const getNumbersFromColumn = (n, board) => {
   return result;
 };
 
-const print = board => {
+const print = (board) => {
   for (let i = 0; i < board.length; i++) {
     let res = "";
     for (let j = 0; j < board.length; j++) {
@@ -43,5 +43,5 @@ module.exports = {
   getRandomList,
   getRandomInt,
   getNumbersFromColumn,
-  print
+  print,
 };
