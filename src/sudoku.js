@@ -5,7 +5,7 @@ import { getRandomList, getRandomInt, getNumbersFromColumn } from "./util.js";
 const DIFFICULTIES = Object.freeze({ easy: 1, medium: 2, hard: 3 });
 
 const filterNonValues = (list, i) => {
-  return list[i].filter(s => s !== "");
+  return list[i].filter((s) => s !== "");
 };
 
 /**
@@ -149,9 +149,9 @@ const getBoxNumber = (columnN, rowN) => {
   const isSecondBox = columnN >= 3 && columnN < 6 && rowN < 3;
   const isThirdBox = columnN >= 6 && rowN < 3;
 
-  const isFourthBox = columnN < 3 && (rowN >= 3 && rowN < 6);
-  const isFifthBox = columnN >= 3 && columnN < 6 && (rowN >= 3 && rowN < 6);
-  const isSixthBox = columnN >= 6 && (rowN >= 3 && rowN < 6);
+  const isFourthBox = columnN < 3 && rowN >= 3 && rowN < 6;
+  const isFifthBox = columnN >= 3 && columnN < 6 && rowN >= 3 && rowN < 6;
+  const isSixthBox = columnN >= 6 && rowN >= 3 && rowN < 6;
 
   const isSeventhBox = columnN < 3 && rowN >= 6;
   const isEighthBox = columnN >= 3 && columnN < 6 && rowN >= 6;
@@ -214,7 +214,7 @@ const generateSudokuBoard = () => {
       const numbersInBox = getNumbersInBox(board, boxNumber);
       const columnNumbers = getNumbersFromColumn(columnN, board);
       const unavailableNumbers = [
-        ...new Set(numbersInBox.concat(columnNumbers))
+        ...new Set(numbersInBox.concat(columnNumbers)),
       ];
 
       let shouldTryAgain = true;
@@ -271,5 +271,5 @@ module.exports = {
   adjustDifficulty,
   DIFFICULTIES,
   getNumbersInBox,
-  getBoxNumber
+  getBoxNumber,
 };

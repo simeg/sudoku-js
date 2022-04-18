@@ -5,7 +5,7 @@ import {
   adjustDifficulty,
   DIFFICULTIES,
   getNumbersInBox,
-  getBoxNumber
+  getBoxNumber,
 } from "../src/sudoku";
 
 import { getRandomList, getRandomInt, getNumbersFromColumn } from "../src/util";
@@ -26,7 +26,7 @@ test("getNumbersInBox should return all numbers from specified box", () => {
   const boardWithBoxOne = [
     [1, 8, 4, 0, 0, 0, 0, 0, 0],
     [6, 2, 7, 0, 0, 0, 0, 0, 0],
-    [5, 9, 3, 0, 0, 0, 0, 0, 0]
+    [5, 9, 3, 0, 0, 0, 0, 0, 0],
   ];
   const actualBoxOne = getNumbersInBox(boardWithBoxOne, 1);
   expect(actualBoxOne.sort()).toStrictEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
@@ -34,7 +34,7 @@ test("getNumbersInBox should return all numbers from specified box", () => {
   const boardWithBoxTwo = [
     [0, 0, 0, 1, 4, 7, 0, 0, 0],
     [0, 0, 0, 2, 5, 8, 0, 0, 0],
-    [0, 0, 0, 3, 6, 9, 0, 0, 0]
+    [0, 0, 0, 3, 6, 9, 0, 0, 0],
   ];
   const actualBoxTwo = getNumbersInBox(boardWithBoxTwo, 2);
   expect(actualBoxTwo.sort()).toStrictEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
@@ -42,7 +42,7 @@ test("getNumbersInBox should return all numbers from specified box", () => {
   const boardWithBoxThree = [
     [0, 0, 0, 0, 0, 0, 9, 4, 3],
     [0, 0, 0, 0, 0, 0, 8, 5, 2],
-    [0, 0, 0, 0, 0, 0, 7, 6, 1]
+    [0, 0, 0, 0, 0, 0, 7, 6, 1],
   ];
   const actualBoxThree = getNumbersInBox(boardWithBoxThree, 3);
   expect(actualBoxThree.sort()).toStrictEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
@@ -53,7 +53,7 @@ test("getNumbersInBox should return all numbers from specified box", () => {
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [1, 4, 7, 0, 0, 0, 0, 0, 0],
     [2, 5, 8, 0, 0, 0, 0, 0, 0],
-    [3, 6, 9, 0, 0, 0, 0, 0, 0]
+    [3, 6, 9, 0, 0, 0, 0, 0, 0],
   ];
   const actualBoxFour = getNumbersInBox(boardWithBoxFour, 4);
   expect(actualBoxFour.sort()).toStrictEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
@@ -64,7 +64,7 @@ test("getNumbersInBox should return all numbers from specified box", () => {
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 1, 4, 7, 0, 0, 0],
     [0, 0, 0, 2, 5, 8, 0, 0, 0],
-    [0, 0, 0, 3, 6, 9, 0, 0, 0]
+    [0, 0, 0, 3, 6, 9, 0, 0, 0],
   ];
   const actualBoxFive = getNumbersInBox(boardWithBoxFive, 5);
   expect(actualBoxFive.sort()).toStrictEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
@@ -75,7 +75,7 @@ test("getNumbersInBox should return all numbers from specified box", () => {
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 9, 4, 3],
     [0, 0, 0, 0, 0, 0, 8, 5, 2],
-    [0, 0, 0, 0, 0, 0, 7, 6, 1]
+    [0, 0, 0, 0, 0, 0, 7, 6, 1],
   ];
   const actualBoxSix = getNumbersInBox(boardWithBoxSix, 6);
   expect(actualBoxSix.sort()).toStrictEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
@@ -89,7 +89,7 @@ test("getNumbersInBox should return all numbers from specified box", () => {
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [1, 4, 7, 0, 0, 0, 0, 0, 0],
     [2, 5, 8, 0, 0, 0, 0, 0, 0],
-    [3, 6, 9, 0, 0, 0, 0, 0, 0]
+    [3, 6, 9, 0, 0, 0, 0, 0, 0],
   ];
   const actualBoxSeven = getNumbersInBox(boardWithBoxSeven, 7);
   expect(actualBoxSeven.sort()).toStrictEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
@@ -103,7 +103,7 @@ test("getNumbersInBox should return all numbers from specified box", () => {
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 1, 2, 3, 0, 0, 0],
     [0, 0, 0, 4, 5, 6, 0, 0, 0],
-    [0, 0, 0, 7, 8, 9, 0, 0, 0]
+    [0, 0, 0, 7, 8, 9, 0, 0, 0],
   ];
   const actualBoxEight = getNumbersInBox(boardWithBoxEight, 8);
   expect(actualBoxEight.sort()).toStrictEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
@@ -117,7 +117,7 @@ test("getNumbersInBox should return all numbers from specified box", () => {
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 1, 2, 3],
     [0, 0, 0, 0, 0, 0, 4, 5, 6],
-    [0, 0, 0, 0, 0, 0, 7, 8, 9]
+    [0, 0, 0, 0, 0, 0, 7, 8, 9],
   ];
   const actualBoxNine = getNumbersInBox(boardWithBoxNine, 9);
   expect(actualBoxNine.sort()).toStrictEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
@@ -138,7 +138,7 @@ test("getNumbersInBox should return all numbers from specified box", () => {
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 1, 2, 3],
     [0, 0, 0, 0, 0, 0, 4, 5],
-    [0, 0, 0, 0, 0, 0]
+    [0, 0, 0, 0, 0, 0],
   ];
   const actualBoxNineWithMissingValues = getNumbersInBox(
     boardWithBoxNineWithMissingValues,
@@ -245,7 +245,11 @@ test("getRandomInt returns random within boundaries", () => {
 });
 
 test("getNumbersFromColumn returns list of all numbers in column N", () => {
-  const board = [[5, 4, 7], [1, 5, 9], [2, 6]];
+  const board = [
+    [5, 4, 7],
+    [1, 5, 9],
+    [2, 6],
+  ];
 
   const actualFirstColumn = getNumbersFromColumn(0, board);
   const actualSecondColumn = getNumbersFromColumn(1, board);
@@ -263,7 +267,7 @@ const testAdjustDifficulty = (difficulty, min, max) => {
   // Check all rows so that they don't contain more than min-max
   for (let i = 0; i < actualAdjustedBoard.length; i++) {
     // Filter out empty values
-    const row = actualAdjustedBoard[i].filter(s => s !== "");
+    const row = actualAdjustedBoard[i].filter((s) => s !== "");
     expect(row.length).not.toBeLessThan(min);
     expect(row.length).not.toBeGreaterThan(max);
   }

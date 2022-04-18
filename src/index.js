@@ -25,7 +25,7 @@ app.get("/", async (req, res) => {
     row6,
     row7,
     row8,
-    row9
+    row9,
   });
 });
 
