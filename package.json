@@ -32,6 +32,6 @@
     "prettier-eslint": "13.0.0"
   },
   "engines": {
-    "node": "12.x"
+    "node": "17.x"
   }
 }
